@@ -1,0 +1,33 @@
+# UGUI 的 Outline 组件
+- 增加顶点，颜色为顶点颜色，宽度为顶点偏移
+- CPU 层增加顶点
+  - 从 4 个方向复制顶点，再对顶点偏移
+  - 顶点数增加了4倍以上
+    - 顶点数变为：vh 中的索引数量 \* 5
+    - 200 个字就有 3000 个顶点
+    - 上限最多 65000 个顶点
+      - Unity 用 List<int> 存储顶点索引
+- 优点
+  - 不依赖 GPU（shader、material）
+  - 不同文字组件，能共用材质
+  - 缺点
+  - 显存占用，带宽压力
+  - 效果较差
+
+# 自定义 Outline 组件
+- GPU 层增加一个 pass
+  - 顶点外扩、UV 内缩
+  - 从 8 个方向采样累加 alpha 值
+  - 颜色为材质颜色或顶点属性（uv2、normal、tangent）
+  - 宽度 8 方向的采样半径
+- 优点
+  - 性能更好
+- 缺点
+  - 渲染批次增加
+  - 颜色若使用材质颜色，不同文字组件，无法共享材质
+  - 颜色若使用顶点属性，显存压力更大
+  - 可以将颜色传入顶点UV（或法线、切线），可共享材质
+  - Canvas 要开启 Addtional Shader Channels
+- 参考：
+  - https://blog.csdn.net/zhenmu/article/details/88821562?spm=1001.2014.3001.5502
+  - https://blog.csdn.net/HelloCLanguage/article/details/105836309
