@@ -25,9 +25,9 @@
 - 缺点
   - 渲染批次增加
   - 颜色若使用材质颜色，不同文字组件，无法共享材质
-  - 颜色若使用顶点属性，显存压力更大
-  - 可以将颜色传入顶点UV（或法线、切线），可共享材质
-  - Canvas 要开启 Addtional Shader Channels
+  - 颜色若使用顶点属性，显存压力大
+    - 将颜色传入顶点UV（或法线、切线），可共享材质
+    - Canvas 开启 Addtional Shader Channels
 - 参考：
   - https://blog.csdn.net/zhenmu/article/details/88821562?spm=1001.2014.3001.5502
   - https://blog.csdn.net/HelloCLanguage/article/details/105836309
